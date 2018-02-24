@@ -1,17 +1,16 @@
 {
-  "name": "simple meteor-react appі",
+  "name": "simple meteor-react app",
   "version": "1.0.1",
   "description": "Test project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  
   "author": "Nazar Rachun",
   "license": "ISC",
-  
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "bcrypt": "^1.0.3",
     "classnames": "^2.2.5",
     "history": "^3.0.0",
     "material-ui": "^0.20.0",

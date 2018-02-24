@@ -26,3 +26,17 @@ export const removeHuman = new ValidatedMethod({
     People.remove({ _id });
   }
 });
+
+export const editHuman = new ValidatedMethod({
+  name: 'edit.human',
+  validate: new SimpleSchema({
+    _id: { type: String },
+    name: { type: String },
+    age: { type: Number },
+    sex: { type: String },
+    street: { type: String }
+  }).validator(),
+  run({_id, name, age, sex, street }) {
+    People.update({_id}, {$set: {name, age, sex, street }});
+  },
+});

@@ -4,11 +4,9 @@ import classNames from 'classnames';
 import { People } from '/imports/api/people/people';
 import { addHuman } from '/imports/api/people/methods';
 import { removeHuman } from '/imports/api/people/methods';
-
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import './flexbox.css';
-
 
 class Home extends React.Component {
   constructor() {
@@ -16,23 +14,19 @@ class Home extends React.Component {
 
     this.state = {};
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
-  handleSubmit(event) {
+  onSubmit(event) {
     event.preventDefault();
+    const { name, age, sex, street } = this;
+    const nameValue = name && name.getValue();
+    const ageValue = age && parseInt(age.getValue());
+    const sexValue = sex && sex.getValue();
+    const streetValue = street && street.getValue();
 
-    addHuman.call({
-      name: this.name.getValue(),
-      age: parseInt(this.age.getValue()),
-      sex: this.sex.getValue(),
-      street: this.street.getValue()
-    }, () => {
-      this.name.value = '';
-      this.age.value = '';
-      this.sex.value = '';
-      this.street.value = '';
-    });
+    this.props.handleSubmit(nameValue, ageValue, sexValue, streetValue)
   }
+
   handleRemove(_id) {
     removeHuman.call({ _id });
   }
@@ -50,7 +44,7 @@ class Home extends React.Component {
           <br />
           <TextField  ref={(elem) => {this.street=elem;}}  floatingLabelText="Street"  floatingLabelFixed={true} />
           <br /><br />
-          <RaisedButton label="Submit" onClick={this.handleSubmit}  primary />
+          <RaisedButton label="Submit" onClick={this.onSubmit} primary />
         </form>
 
         {this.props.people.length ?
@@ -69,6 +63,10 @@ class Home extends React.Component {
                 <td>{human.age}</td>
                 <td>{human.sex}</td>
                 <td>{human.street}</td>
+                <td><RaisedButton
+                  label="Edit"
+                  href={`/edit/${human._id}`}
+                  secondary /></td>
                 <td><RaisedButton label="Remove" onClick={this.handleRemove.bind(this, human._id)} secondary /></td>
               </tr>)}
             </tbody>
@@ -79,10 +77,19 @@ class Home extends React.Component {
   }
 
   export default createContainer(() => {
+    const handleSubmit = (name, age, sex, street) => {
+      addHuman.call({
+        name,
+        age,
+        sex,
+        street
+      });
+    }
     const peopleHandle = Meteor.subscribe('people');
     const people = peopleHandle.ready() ? People.find().fetch() : [];
 
     return {
-      people
+      people,
+      handleSubmit
     };
   }, Home);
