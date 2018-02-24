@@ -27,9 +27,10 @@ class Edit extends React.Component {
     const ageValue = age && parseInt(age.getValue());
     const sexValue = sex && sex.getValue();
     const streetValue = street && street.getValue();
+    const id = (this.props.human._id);
 
-    this.props.handleEdit(nameValue, ageValue, sexValue, streetValue)
-  }
+    this.props.handleEdit( id, nameValue, ageValue, sexValue, streetValue )
+  }; 
 
   render() {
     const { human } = this.props;
