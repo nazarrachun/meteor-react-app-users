@@ -6,7 +6,8 @@ import { editHuman } from '/imports/api/people/methods';
 import Snackbar from 'material-ui/Snackbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import './flexbox.css';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import '/imports/ui/components/Styles/flexbox.css';
 
 class Edit extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Edit extends React.Component {
     const id = (this.props.human._id);
 
     this.props.handleEdit( id, nameValue, ageValue, sexValue, streetValue )
-  }; 
+  };
 
   render() {
     const { human } = this.props;
@@ -38,7 +39,7 @@ class Edit extends React.Component {
     return (
       <section className="container">
         <form className="left-half" onSubmit={this.handleEdit}>
-          <h1>Edit</h1>
+          <h1>Edit user</h1>
           <TextField
             value={!nameEdited && human.name || name}
             onChange={(e, name) => this.setState({ name, nameEdited: true })}

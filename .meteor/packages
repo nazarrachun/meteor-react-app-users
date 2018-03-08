@@ -22,10 +22,12 @@ random@1.0.10
 ejson@1.1.0
 spacebars
 check@1.2.5
-accounts-password@1.5.0
+accounts-password
 shell-server
 dynamic-import
 mdg:validated-method
 aldeed:simple-schema
 static-html
 react-meteor-data
+email
+alanning:roles

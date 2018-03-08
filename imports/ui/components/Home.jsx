@@ -6,7 +6,7 @@ import { addHuman } from '/imports/api/people/methods';
 import { removeHuman } from '/imports/api/people/methods';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import './flexbox.css';
+import '/imports/ui/components/Styles/flexbox.css';
 
 class Home extends React.Component {
   constructor() {
@@ -35,7 +35,7 @@ class Home extends React.Component {
     return (
       <section className="container">
         <form className="left-half" onSubmit={this.handleSubmit}>
-          <h1>Home</h1>
+          <h1>Home page</h1>
           <TextField  ref={(elem) => {this.name=elem;}}  floatingLabelText="Name"  floatingLabelFixed={true} />
           <br />
           <TextField  ref={(elem) => {this.age=elem;}}  floatingLabelText="Age"  floatingLabelFixed={true} />
@@ -44,7 +44,7 @@ class Home extends React.Component {
           <br />
           <TextField  ref={(elem) => {this.street=elem;}}  floatingLabelText="Street"  floatingLabelFixed={true} />
           <br /><br />
-          <RaisedButton label="Submit" onClick={this.onSubmit} primary />
+          <RaisedButton label="Submit" onClick={this.onSubmit} default />
         </form>
 
         {this.props.people.length ?
@@ -63,10 +63,7 @@ class Home extends React.Component {
                 <td>{human.age}</td>
                 <td>{human.sex}</td>
                 <td>{human.street}</td>
-                <td><RaisedButton
-                  label="Edit"
-                  href={`/edit/${human._id}`}
-                  secondary /></td>
+                <td><RaisedButton label="Edit" href={`/edit/${human._id}`} primary /></td>
                 <td><RaisedButton label="Remove" onClick={this.handleRemove.bind(this, human._id)} secondary /></td>
               </tr>)}
             </tbody>
